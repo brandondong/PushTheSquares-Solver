@@ -1,0 +1,7 @@
+/**
+ * Created by Brandon on 2015-09-24.
+ */
+public enum Tile {
+    EMPTY, RED_FINISH, BLUE_FINISH, YELLOW_FINISH, GREEN_FINISH,
+    SOLID, MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT
+}
