@@ -42,6 +42,10 @@ public class Block {
         }
     }
 
+    public BlockColor getColor() {
+        return color;
+    }
+
     public int getX() {
         return x;
     }

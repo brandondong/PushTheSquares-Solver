@@ -2,6 +2,19 @@
  * Created by Brandon on 2015-09-24.
  */
 public enum Tile {
-    EMPTY, RED_FINISH, BLUE_FINISH, YELLOW_FINISH, GREEN_FINISH,
-    SOLID, MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT
+    EMPTY, RED(BlockColor.RED), BLUE(BlockColor.BLUE), YELLOW(BlockColor.YELLOW), GREEN(BlockColor.GREEN),
+    SOLID, UP(Direction.UP), DOWN(Direction.DOWN), RIGHT(Direction.RIGHT), LEFT(Direction.LEFT);
+
+    public BlockColor color;
+    public Direction direction;
+
+    private Tile() {}
+
+    private Tile(BlockColor color) {
+        this.color = color;
+    }
+
+    private Tile(Direction direction) {
+        this.direction = direction;
+    }
 }
