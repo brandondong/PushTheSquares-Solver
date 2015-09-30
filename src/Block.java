@@ -16,12 +16,44 @@ public class Block {
         this.board = board;
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
+    // Modifies: this
+    // Effects: returns true and moves the block if possible
+    public boolean move() {
+        return moveInDirection(direction);
     }
 
-    // Effects: returns the x-position after moving once
-    private int nextX() {
+    // Modifies: this
+    // Effects: returns true and moves the block in the given direction if possible
+    public boolean moveInDirection(Direction dir) {
+        int nextX = nextX(dir);
+        int nextY = nextY(dir);
+
+        if (board.withinBoard(nextX, nextY)) {
+            Tile tile = board.getTileAtPos(nextX, nextY);
+            if (tile == Tile.SOLID) return false;
+
+            Block next = board.getBlockAtPos(nextX, nextY);
+            if (next != null && !next.moveInDirection(dir)) return false;
+
+            x = nextX;
+            y = nextY;
+            interactWith(tile);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Modifies: this
+    // Effects: sets the direction to the direction of the tile
+    public void interactWith(Tile tile) {
+        if (tile.direction != null) {
+            direction = tile.direction;
+        }
+    }
+
+    // Effects: returns the x-position after moving in a given direction
+    private int nextX(Direction direction) {
         if (direction == Direction.LEFT) {
             return x - 1;
         } else if (direction == Direction.RIGHT) {
@@ -31,8 +63,8 @@ public class Block {
         }
     }
 
-    // Effects: returns the y-position after moving once
-    private int nextY() {
+    // Effects: returns the y-position after moving in a given direction
+    private int nextY(Direction direction) {
         if (direction == Direction.DOWN) {
             return y + 1;
         } else if (direction == Direction.UP) {
