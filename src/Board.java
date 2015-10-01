@@ -10,6 +10,26 @@ public class Board {
     private List<Block> blocks;
     private Tile[][] tiles;
 
+    public Board(int width, int height, List<BlockColor> colors, List<Block> blocks, Tile[][] tiles) {
+        this.width = width;
+        this.height = height;
+        this.colors = colors;
+        this.blocks = blocks;
+        this.tiles = tiles;
+    }
+
+    // Modifies: this
+    // Effects: returns true and moves all blocks of given color if possible
+    public boolean moveBlocksByColor(BlockColor c) {
+        boolean hasMoved = false;
+        for (Block next : blocks) {
+            if (next.getColor() == c && next.move()) {
+                hasMoved = true;
+            }
+        }
+        return hasMoved;
+    }
+
     // Effects: returns true if x,y point is within the board
     public boolean withinBoard(int x, int y) {
         return x >= 0 && x < width &&
