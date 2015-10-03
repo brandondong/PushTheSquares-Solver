@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * Created by Brandon on 2015-09-24.
  */
@@ -72,6 +74,10 @@ public class Block {
         } else {
             return y;
         }
+    }
+
+    public Block getCopy() {
+        return new Block(color, direction, x, y, board);
     }
 
     public BlockColor getColor() {

@@ -1,3 +1,6 @@
+package Model;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +19,31 @@ public class Board {
         this.colors = colors;
         this.blocks = blocks;
         this.tiles = tiles;
+    }
+
+    public List<Board> nextBoards() {
+        List<Board> gen = new ArrayList<>();
+        for (BlockColor c : colors) {
+            Board next = new Board(width, height, colors, copyBlocks(blocks), copyArray(tiles));
+            if (next.moveBlocksByColor(c)) {
+                gen.add(next);
+            }
+        }
+        return gen;
+    }
+
+    private List<Block> copyBlocks(List<Block> blocks) {
+        return null;
+    }
+
+    private Tile[][] copyArray(Tile[][] array) {
+        Tile[][] copy = new Tile[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                copy[i][j] = tiles[i][j];
+            }
+        }
+        return copy;
     }
 
     // Modifies: this
