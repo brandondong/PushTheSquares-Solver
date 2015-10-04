@@ -7,15 +7,11 @@ import java.util.List;
  * Created by Brandon on 2015-09-25.
  */
 public class Board {
-    private int width;
-    private int height;
     private List<BlockColor> colors;
     private List<Block> blocks;
     private Tile[][] tiles;
 
-    public Board(int width, int height, List<BlockColor> colors, List<Block> blocks, Tile[][] tiles) {
-        this.width = width;
-        this.height = height;
+    public Board(List<BlockColor> colors, List<Block> blocks, Tile[][] tiles) {
         this.colors = colors;
         this.blocks = blocks;
         this.tiles = tiles;
@@ -24,7 +20,7 @@ public class Board {
     public List<Board> nextBoards() {
         List<Board> gen = new ArrayList<>();
         for (BlockColor c : colors) {
-            Board next = new Board(width, height, colors, copyBlocks(blocks), copyArray(tiles));
+            Board next = new Board(colors, copyBlocks(blocks), copyArray(tiles));
             if (next.moveBlocksByColor(c)) {
                 gen.add(next);
             }
@@ -32,14 +28,24 @@ public class Board {
         return gen;
     }
 
+    // Effects: creates a copy of the board's blocks
     private List<Block> copyBlocks(List<Block> blocks) {
-        return null;
+        List<Block> copy = new ArrayList<>();
+        for (Block next : blocks) {
+            Block nextCopy = next.getCopy();
+            copy.add(nextCopy);
+        }
+        return copy;
     }
 
+    // Effects: creates a copy of the board's tile array
     private Tile[][] copyArray(Tile[][] array) {
-        Tile[][] copy = new Tile[height][width];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        int width = tiles.length;
+        int height = tiles[0].length;
+
+        Tile[][] copy = new Tile[width][height];
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 copy[i][j] = tiles[i][j];
             }
         }
@@ -60,8 +66,8 @@ public class Board {
 
     // Effects: returns true if x,y point is within the board
     public boolean withinBoard(int x, int y) {
-        return x >= 0 && x < width &&
-                y >= 0 && y < height;
+        return x >= 0 && x < tiles.length &&
+                y >= 0 && y < tiles[0].length;
     }
 
     // Effects: returns the block at the x,y point, null if none exists
@@ -90,11 +96,19 @@ public class Board {
         return true;
     }
 
-    public int getWidth() {
-        return width;
-    }
+    @Override
+    public String toString() {
+        int width = tiles.length;
+        int height = tiles[0].length;
+        StringBuilder builder = new StringBuilder();
 
-    public int getHeight() {
-        return height;
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                builder.append(tiles[x][y]);
+                builder.append(" ");
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 }

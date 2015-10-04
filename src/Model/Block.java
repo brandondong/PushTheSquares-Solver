@@ -91,4 +91,10 @@ public class Block {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return color.toString().substring(0, 1) +
+                direction.toString().substring(0, 1);
+    }
 }

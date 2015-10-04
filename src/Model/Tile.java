@@ -19,4 +19,9 @@ public enum Tile {
     private Tile(Direction direction) {
         this.direction = direction;
     }
+
+    @Override
+    public String toString() {
+        return super.toString().substring(0, 2);
+    }
 }
