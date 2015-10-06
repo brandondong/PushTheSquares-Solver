@@ -17,6 +17,10 @@ public class Board {
         this.tiles = tiles;
     }
 
+    public void addBlock(Block b) {
+        blocks.add(b);
+    }
+
     public List<Board> nextBoards() {
         List<Board> gen = new ArrayList<>();
         for (BlockColor c : colors) {
@@ -98,6 +102,10 @@ public class Board {
 
     @Override
     public String toString() {
+        return stringTiles() + "\n\n" + stringBlocks();
+    }
+
+    private String stringTiles() {
         int width = tiles.length;
         int height = tiles[0].length;
         StringBuilder builder = new StringBuilder();
@@ -106,6 +114,26 @@ public class Board {
             for (int x = 0; x < width; x++) {
                 builder.append(tiles[x][y]);
                 builder.append(" ");
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
+    private String stringBlocks() {
+        int width = tiles.length;
+        int height = tiles[0].length;
+        StringBuilder builder = new StringBuilder();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Block next = getBlockAtPos(x, y);
+                if (next != null) {
+                    builder.append(next);
+                    builder.append(" ");
+                } else {
+                    builder.append("** ");
+                }
             }
             builder.append("\n");
         }

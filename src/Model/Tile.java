@@ -22,6 +22,9 @@ public enum Tile {
 
     @Override
     public String toString() {
+        if (this == EMPTY) {
+            return "**";
+        }
         return super.toString().substring(0, 2);
     }
 }
