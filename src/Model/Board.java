@@ -102,7 +102,7 @@ public class Board {
 
     @Override
     public String toString() {
-        return stringTiles() + "\n\n" + stringBlocks();
+        return "Tiles:\n" + stringTiles() + "\nBlocks:\n" + stringBlocks();
     }
 
     private String stringTiles() {

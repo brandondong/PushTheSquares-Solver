@@ -41,7 +41,13 @@ public class BoardTest {
     }
 
     @Test
-    public void print() {
+    public void testNext() {
+        System.out.println("NEXT");
+        for (Board next : board1.nextBoards()) {
+            System.out.println(next);
+        }
+        System.out.println("ORIGINAL");
         System.out.println(board1);
+        assertFalse(board1.isOver());
     }
 }
