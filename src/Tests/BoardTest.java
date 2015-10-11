@@ -4,7 +4,9 @@ import Model.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -27,7 +29,7 @@ public class BoardTest {
         colors.add(BlockColor.BLUE);
         colors.add(BlockColor.RED);
 
-        board1 = new Board(colors, new ArrayList<Block>(), level1);
+        board1 = new Board(colors, new ArrayList<Block>(), level1, new ArrayList<BlockColor>(), new HashMap<Point, Point>());
         board1.addBlock(new Block(BlockColor.BLUE, Direction.DOWN, 1, 0, board1));
         board1.addBlock(new Block(BlockColor.RED, Direction.DOWN, 3, 0, board1));
     }

@@ -1,7 +1,9 @@
 package Model;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Brandon on 2015-09-25.
@@ -10,21 +12,36 @@ public class Board {
     private List<BlockColor> colors;
     private List<Block> blocks;
     private Tile[][] tiles;
+    private List<BlockColor> path;
+    private Map<Point, Point> tps;
 
-    public Board(List<BlockColor> colors, List<Block> blocks, Tile[][] tiles) {
+    public Board(List<BlockColor> colors, List<Block> blocks, Tile[][] tiles, List<BlockColor> path, Map<Point, Point> tps) {
         this.colors = colors;
         this.blocks = blocks;
         this.tiles = tiles;
+        this.path = path;
+        this.tps = tps;
     }
 
     public void addBlock(Block b) {
         blocks.add(b);
     }
 
+    public void addTP(int x, int y, int tpX, int tpY) {
+        tiles[x][y] = Tile.TP;
+        tiles[tpX][tpY] = Tile.TP;
+        tps.put(new Point(x, y), new Point(tpX, tpY));
+        tps.put(new Point(tpX, tpY), new Point(x, y));
+    }
+
+    public Point getTPPos(Point p) {
+        return tps.get(p);
+    }
+
     public List<Board> nextBoards() {
         List<Board> gen = new ArrayList<>();
         for (BlockColor c : colors) {
-            Board next = new Board(colors, copyBlocks(blocks), copyArray(tiles));
+            Board next = new Board(colors, copyBlocks(blocks), tiles, new ArrayList<>(path), tps);
             if (next.moveBlocksByColor(c)) {
                 gen.add(next);
             }
@@ -42,20 +59,6 @@ public class Board {
         return copy;
     }
 
-    // Effects: creates a copy of the board's tile array
-    private Tile[][] copyArray(Tile[][] array) {
-        int width = tiles.length;
-        int height = tiles[0].length;
-
-        Tile[][] copy = new Tile[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                copy[i][j] = tiles[i][j];
-            }
-        }
-        return copy;
-    }
-
     // Modifies: this
     // Effects: returns true and moves all blocks of given color if possible
     public boolean moveBlocksByColor(BlockColor c) {
@@ -64,6 +67,9 @@ public class Board {
             if (next.getColor() == c && next.move()) {
                 hasMoved = true;
             }
+        }
+        if (hasMoved) {
+            path.add(c);
         }
         return hasMoved;
     }

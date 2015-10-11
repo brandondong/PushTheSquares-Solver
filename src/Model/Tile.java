@@ -5,7 +5,7 @@ package Model;
  */
 public enum Tile {
     EMPTY, RED(BlockColor.RED), BLUE(BlockColor.BLUE), YELLOW(BlockColor.YELLOW), GREEN(BlockColor.GREEN),
-    SOLID, UP(Direction.UP), DOWN(Direction.DOWN), RIGHT(Direction.RIGHT), LEFT(Direction.LEFT);
+    SOLID, UP(Direction.UP), DOWN(Direction.DOWN), RIGHT(Direction.RIGHT), LEFT(Direction.LEFT), TP;
 
     public BlockColor color;
     public Direction direction;
