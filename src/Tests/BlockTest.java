@@ -16,7 +16,7 @@ public class BlockTest {
 
     @Before
     public void setUp() {
-        test = new Block(BlockColor.BLUE, Direction.DOWN, 0, 0, null);
+        test = new Block(BlockColor.BLUE, Direction.DOWN, 0, 0);
     }
 
     @Test

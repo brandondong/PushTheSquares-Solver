@@ -12,12 +12,20 @@ public class Block {
     private int y;
     private Board board;
 
+    public Block(BlockColor color, Direction direction, int x, int y) {
+        this(color, direction, x, y, null);
+    }
+
     public Block(BlockColor color, Direction direction, int x, int y, Board board) {
         this.color = color;
         this.direction = direction;
         this.x = x;
         this.y = y;
         this.board = board;
+    }
+
+    public void setBoard(Board b) {
+        board = b;
     }
 
     // Modifies: this

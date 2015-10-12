@@ -2,6 +2,7 @@ package Model;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,15 @@ public class Board {
     private List<BlockColor> path;
     private Map<Point, Point> tps;
 
+    public Board(int width, int height) {
+        colors = new ArrayList<>();
+        blocks = new ArrayList<>();
+        tiles = new Tile[width][height];
+        path = new ArrayList<>();
+        tps = new HashMap<>();
+        fillTileArray(tiles);
+    }
+
     public Board(List<BlockColor> colors, List<Block> blocks, Tile[][] tiles, List<BlockColor> path, Map<Point, Point> tps) {
         this.colors = colors;
         this.blocks = blocks;
@@ -23,8 +33,25 @@ public class Board {
         this.tps = tps;
     }
 
+    public void addColor(BlockColor c) {
+        colors.add(c);
+    }
+
+    public void addTile(int x, int y, Tile t) {
+        tiles[x][y] = t;
+    }
+
+    private void fillTileArray(Tile[][] array) {
+        for (int x = 0; x < array.length; x++) {
+            for (int y = 0; y < array[0].length; y++) {
+                array[x][y] = Tile.EMPTY;
+            }
+        }
+    }
+
     public void addBlock(Block b) {
         blocks.add(b);
+        b.setBoard(this);
     }
 
     public void addTP(int x, int y, int tpX, int tpY) {
