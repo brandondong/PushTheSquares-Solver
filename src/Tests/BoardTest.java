@@ -38,4 +38,9 @@ public class BoardTest {
         System.out.println(board1);
         assertFalse(board1.isOver());
     }
+
+    @Test
+    public void testSolve() {
+        System.out.println(board1.solve());
+    }
 }

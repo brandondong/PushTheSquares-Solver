@@ -67,7 +67,10 @@ public class Block {
 
     private Point nextXY(Direction direction) {
         Point p = Direction.move(new Point(x, y), direction);
-        Tile nextTile = board.getTileAtPos(p.x, p.y);
+        Tile nextTile = null;
+        if (board.withinBoard(p.x, p.y)) {
+            nextTile = board.getTileAtPos(p.x, p.y);
+        }
         if (nextTile == Tile.TP) {
             return Direction.move(board.getTPPos(p), direction);
         } else {

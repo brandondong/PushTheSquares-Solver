@@ -1,10 +1,10 @@
 package Model;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by Brandon on 2015-09-25.
@@ -31,6 +31,19 @@ public class Board {
         this.tiles = tiles;
         this.path = path;
         this.tps = tps;
+    }
+
+    public List<BlockColor> solve() {
+        Queue<Board> queue = new ConcurrentLinkedQueue<>();
+        queue.add(this);
+        while (!queue.isEmpty()) {
+            Board next = queue.remove();
+            if (next.isOver()) {
+                return next.getPath();
+            }
+            queue.addAll(next.nextBoards());
+        }
+        return null;
     }
 
     public void addColor(BlockColor c) {
@@ -131,6 +144,10 @@ public class Board {
             }
         }
         return true;
+    }
+
+    public List<BlockColor> getPath() {
+        return path;
     }
 
     @Override
