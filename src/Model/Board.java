@@ -3,21 +3,18 @@ package Model;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by Brandon on 2015-09-25.
  */
 public class Board {
-    private List<BlockColor> colors;
     private List<Block> blocks;
     private Tile[][] tiles;
     private List<BlockColor> path;
     private Map<Point, Point> tps;
 
     public Board(int width, int height) {
-        colors = new ArrayList<>();
         blocks = new ArrayList<>();
         tiles = new Tile[width][height];
         path = new ArrayList<>();
@@ -25,9 +22,8 @@ public class Board {
         fillTileArray(tiles);
     }
 
-    public Board(List<BlockColor> colors, List<Block> blocks, Tile[][] tiles, List<BlockColor> path, Map<Point, Point> tps) {
-        this.colors = colors;
-        this.blocks = blocks;
+    public Board(Tile[][] tiles, List<BlockColor> path, Map<Point, Point> tps) {
+        blocks = new ArrayList<>();
         this.tiles = tiles;
         this.path = path;
         this.tps = tps;
@@ -44,10 +40,6 @@ public class Board {
             queue.addAll(next.nextBoards());
         }
         return null;
-    }
-
-    public void addColor(BlockColor c) {
-        colors.add(c);
     }
 
     public void addTile(int x, int y, Tile t) {
@@ -78,15 +70,26 @@ public class Board {
         return tps.get(p);
     }
 
+    // Effects: returns a list of boards generated from trying all possible moves
     public List<Board> nextBoards() {
         List<Board> gen = new ArrayList<>();
-        for (BlockColor c : colors) {
-            Board next = new Board(colors, copyBlocks(blocks), tiles, new ArrayList<>(path), tps);
+        for (BlockColor c : BlockColor.values()) {
+            Board next = copyBoard();
             if (next.moveBlocksByColor(c)) {
                 gen.add(next);
             }
         }
         return gen;
+    }
+
+    // Effects: creates a copy of the board
+    public Board copyBoard() {
+        Board copy = new Board(tiles, new ArrayList<>(path), tps);
+        for (Block next : blocks) {
+            Block nextCopy = next.getCopy();
+            copy.addBlock(nextCopy);
+        }
+        return copy;
     }
 
     // Effects: creates a copy of the board's blocks
