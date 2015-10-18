@@ -92,16 +92,6 @@ public class Board {
         return copy;
     }
 
-    // Effects: creates a copy of the board's blocks
-    private List<Block> copyBlocks(List<Block> blocks) {
-        List<Block> copy = new ArrayList<>();
-        for (Block next : blocks) {
-            Block nextCopy = next.getCopy();
-            copy.add(nextCopy);
-        }
-        return copy;
-    }
-
     // Modifies: this
     // Effects: returns true and moves all blocks of given color if possible
     public boolean moveBlocksByColor(BlockColor c) {
