@@ -4,6 +4,7 @@ import Model.BlockColor;
 import Model.Board;
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Brandon on 2015-10-19.
@@ -11,9 +12,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        Board b = null;
         while (true) {
-            initBoard(b);
+            Board b = initBoard();
             List<BlockColor> solution = b.solve();
             if (solution == null) {
                 System.out.println("No solution found. The board may have been entered incorrectly.");
@@ -24,9 +24,27 @@ public class Main {
         }
     }
 
-    private static void initBoard(Board b) {
+    private static Board initBoard() {
         System.out.println("This is the board setup process, type 'Q' at anytime to quit.");
         System.out.println("Enter width of board:");
+        int width = takeNumInput();
         System.out.println("Enter height of board:");
+        int height = takeNumInput();
+
+        Board b = new Board(width, height);
+        return b;
+    }
+
+    // Effects: allows the user to input a number which it returns
+    private static int takeNumInput() {
+        while (true) {
+            try {
+                Scanner reader = new Scanner(System.in);
+                int n = reader.nextInt();
+                return n;
+            } catch (Exception e) {
+                System.out.println("Invalid number entered. Try again.");
+            }
+        }
     }
 }
