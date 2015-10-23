@@ -109,8 +109,15 @@ public class Board {
 
     // Effects: returns true if x,y point is within the board
     public boolean withinBoard(int x, int y) {
-        return x >= 0 && x < tiles.length &&
-                y >= 0 && y < tiles[0].length;
+        return withinBoardX(x) && withinBoardY(y);
+    }
+
+    public boolean withinBoardX(int x) {
+        return x >= 0 && x < tiles.length;
+    }
+
+    public boolean withinBoardY(int y) {
+        return y >= 0 && y < tiles[0].length;
     }
 
     // Effects: returns the block at the x,y point, null if none exists
