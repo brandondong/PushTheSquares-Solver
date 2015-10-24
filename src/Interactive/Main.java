@@ -1,5 +1,6 @@
 package Interactive;
 
+import Model.Block;
 import Model.BlockColor;
 import Model.Board;
 import Model.Tile;
@@ -23,6 +24,7 @@ public class Main {
                 System.out.println("Solution found:");
                 System.out.println(solution);
             }
+            System.out.println();
         }
     }
 
@@ -46,19 +48,44 @@ public class Main {
             System.out.println("'2' for a directional switcher tile");
             System.out.println("'3' for a teleporter block");
             System.out.println("'4' for a solid block");
+            System.out.println("'5' for a colored, movable block");
             System.out.println("'0' when you have finished.");
             int input = takeNumInput();
-            switch (input) {
-                case 0: return;
-                case 4:
-                    Point p = inputPoint(b);
+            if (input > 5) {
+                System.out.println("Unexpected number entered.");
+            } else if (input == 0 ){
+                return;
+            } else {
+                Point p = inputPoint(b);
+                if (input == 1) {
+                    Tile c = inputColor();
+                    b.addTile(p.x, p.y, c);
+                } else if (input == 4) {
                     b.addTile(p.x, p.y, Tile.SOLID);
-                    break;
+                }
+                System.out.println(b);
+            }
+        }
+    }
+
+    // Effects: allows the user to input the color represented as the tile
+    private static Tile inputColor() {
+        while (true) {
+            System.out.println("Enter the number corresponding the the color:");
+            System.out.println("'1' for blue");
+            System.out.println("'2' for red");
+            System.out.println("'3' for yellow");
+            System.out.println("'4' for green");
+            int input = takeNumInput();
+            switch (input) {
+                case 1: return Tile.BLUE;
+                case 2: return Tile.RED;
+                case 3: return Tile.YELLOW;
+                case 4: return Tile.GREEN;
                 default:
                     System.out.println("Unexpected number entered.");
                     break;
             }
-            System.out.println(b);
         }
     }
 

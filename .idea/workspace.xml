@@ -92,8 +92,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Interactive/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47241378">
-              <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.762069">
+              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -245,7 +245,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -257,6 +256,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -279,7 +279,7 @@
       <recent name="Tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.BoardTest">
     <configuration default="false" name="BlockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -505,8 +505,8 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.BoardTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.BoardTest" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.BlockTest" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.TileTest" />
       </list>
@@ -986,22 +986,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/BlockColor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/util/Scanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5993031">
           <caret line="2117" column="15" selection-start-line="2117" selection-start-column="15" selection-end-line="2117" selection-end-column="15" />
-          <folding>
-            <element signature="e#80372#80373#0" expanded="true" />
-            <element signature="e#80416#80417#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1020,14 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="53" column="34" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="78" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
           <folding />
         </state>
       </provider>
@@ -1059,10 +1039,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="78" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/BlockColor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Interactive/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47241378">
-          <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.762069">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
