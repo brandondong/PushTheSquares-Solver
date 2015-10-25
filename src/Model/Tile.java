@@ -10,13 +10,13 @@ public enum Tile {
     public BlockColor color;
     public Direction direction;
 
-    private Tile() {}
+    Tile() {}
 
-    private Tile(BlockColor color) {
+    Tile(BlockColor color) {
         this.color = color;
     }
 
-    private Tile(Direction direction) {
+    Tile(Direction direction) {
         this.direction = direction;
     }
 

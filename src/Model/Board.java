@@ -9,6 +9,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * Created by Brandon on 2015-09-25.
  */
 public class Board {
+    private static final String SPACE_PRINT = spaceLength(7);
+
     private List<Block> blocks;
     private Tile[][] tiles;
     private List<BlockColor> path;
@@ -152,7 +154,25 @@ public class Board {
 
     @Override
     public String toString() {
-        return "Tiles:\n" + stringTiles() + "\nBlocks:\n" + stringBlocks();
+        String tS = stringTiles();
+        String tB = stringBlocks();
+        StringBuilder builder = new StringBuilder();
+        int rowLength = tS.indexOf("\n");
+
+        builder.append("Tiles:");
+        builder.append(spaceLength(rowLength - 6));
+        builder.append(SPACE_PRINT);
+        builder.append("Blocks:\n");
+
+        while (tS.length() > 0) {
+            builder.append(tS.substring(0, rowLength));
+            builder.append(SPACE_PRINT);
+            builder.append(tB.substring(0, rowLength));
+            builder.append("\n");
+            tS = tS.substring(rowLength + 1);
+            tB = tB.substring(rowLength + 1);
+        }
+        return builder.toString();
     }
 
     private String stringTiles() {
@@ -188,5 +208,13 @@ public class Board {
             builder.append("\n");
         }
         return builder.toString();
+    }
+
+    private static String spaceLength(int n) {
+        String s = "";
+        for (int i = 0; i < n; i++) {
+            s += " ";
+        }
+        return s;
     }
 }
