@@ -62,6 +62,14 @@ public class Main {
                 } else if (input == 2) {
                     Tile d = inputDirection();
                     b.addTile(p.x, p.y, d);
+                } else if (input == 3) {
+                    System.out.println("Input the second point:");
+                    Point p2 = inputPoint(b);
+                    b.addTP(p.x, p.y, p2.x, p2.y);
+                } else if (input == 4) {
+                    Tile c = inputColor();
+                    Tile d = inputDirection();
+                    b.addBlock(new Block(c.color, d.direction, p.x, p.y));
                 } else if (input == 5) {
                     b.addTile(p.x, p.y, Tile.SOLID);
                 }
@@ -116,17 +124,18 @@ public class Main {
 
     // Effects: allows the user to input x,y coordinate that are within board
     private static Point inputPoint(Board b) {
-        System.out.println("Enter the x-coordinate (0 based indexing):");
+        System.out.println("The upper-left tile has the coordinate (1,1).");
+        System.out.println("Enter the x-coordinate:");
         int x;
         while (true) {
-            x = takeNumInput();
+            x = takeNumInput() - 1;
             if (b.withinBoardX(x)) break;
             System.out.println("Coordinate is out of bounds.");
         }
-        System.out.println("Enter the y-coordinate (0 based indexing):");
+        System.out.println("Enter the y-coordinate:");
         int y;
         while (true) {
-            y = takeNumInput();
+            y = takeNumInput() - 1;
             if (b.withinBoardY(y)) break;
             System.out.println("Coordinate is out of bounds.");
         }
