@@ -31,9 +31,9 @@ public class Main {
     private static Board initBoard() {
         System.out.println("This is the board setup process, type 'Q' at anytime to quit.");
         System.out.println("Enter width of board:");
-        int width = takeNumInput();
+        int width = takeNumInput(1, 10);
         System.out.println("Enter height of board:");
-        int height = takeNumInput();
+        int height = takeNumInput(1, 10);
 
         Board b = new Board(width, height);
         System.out.println(b);
@@ -50,11 +50,11 @@ public class Main {
             System.out.println("'4' for a colored, movable block");
             System.out.println("'5' for a solid block");
             System.out.println("'0' when you have finished.");
-            int input = takeNumInput();
+            int input = takeNumInput(0, 5);
 
             if (input == 0) {
                 return;
-            } else if (input <= 5) {
+            } else {
                 Point p = inputPoint(b);
                 if (input == 1) {
                     Tile c = inputColor();
@@ -74,8 +74,6 @@ public class Main {
                     b.addTile(p.x, p.y, Tile.SOLID);
                 }
                 System.out.println(b);
-            } else {
-                System.out.println("Unexpected number entered.");
             }
         }
     }
@@ -88,15 +86,13 @@ public class Main {
             System.out.println("'2' for red");
             System.out.println("'3' for yellow");
             System.out.println("'4' for green");
-            int input = takeNumInput();
+
+            int input = takeNumInput(1, 4);
             switch (input) {
                 case 1: return Tile.BLUE;
                 case 2: return Tile.RED;
                 case 3: return Tile.YELLOW;
                 case 4: return Tile.GREEN;
-                default:
-                    System.out.println("Unexpected number entered.");
-                    break;
             }
         }
     }
@@ -109,15 +105,13 @@ public class Main {
             System.out.println("'2' for down");
             System.out.println("'3' for left");
             System.out.println("'4' for right");
-            int input = takeNumInput();
+
+            int input = takeNumInput(1, 4);
             switch (input) {
                 case 1: return Tile.UP;
                 case 2: return Tile.DOWN;
                 case 3: return Tile.LEFT;
                 case 4: return Tile.RIGHT;
-                default:
-                    System.out.println("Unexpected number entered.");
-                    break;
             }
         }
     }
@@ -125,25 +119,18 @@ public class Main {
     // Effects: allows the user to input x,y coordinate that are within board
     private static Point inputPoint(Board b) {
         System.out.println("The upper-left tile has the coordinate (1,1).");
+
         System.out.println("Enter the x-coordinate:");
-        int x;
-        while (true) {
-            x = takeNumInput() - 1;
-            if (b.withinBoardX(x)) break;
-            System.out.println("Coordinate is out of bounds.");
-        }
+        int x = takeNumInput(1, b.getWidth()) - 1;
+
         System.out.println("Enter the y-coordinate:");
-        int y;
-        while (true) {
-            y = takeNumInput() - 1;
-            if (b.withinBoardY(y)) break;
-            System.out.println("Coordinate is out of bounds.");
-        }
+        int y = takeNumInput(1, b.getHeight()) - 1;
+
         return new Point(x,y);
     }
 
-    // Effects: allows the user to input a number which it returns, has to be non-negative
-    private static int takeNumInput() {
+    // Effects: allows the user to input a number which it returns, between low and high
+    private static int takeNumInput(int low, int high) {
         while (true) {
             Scanner reader = new Scanner(System.in);
             try {
@@ -153,10 +140,14 @@ public class Main {
                     System.exit(-1);
                 }
                 int n = Integer.parseInt(s);
-                if (n < 0) throw new Exception();
+                if (n < low || n > high) throw new Exception();
+
                 return n;
-            } catch (Exception e) {
+
+            } catch (RuntimeException e) {
                 System.out.println("Invalid number entered. Try again.");
+            } catch (Exception e) {
+                System.out.println("Number is out of bounds. Try again.");
             }
         }
     }
